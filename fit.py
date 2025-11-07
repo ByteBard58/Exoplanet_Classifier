@@ -11,6 +11,7 @@ from sklearn.linear_model import LogisticRegression
 from xgboost import XGBClassifier
 from imblearn.over_sampling import SMOTE
 from imblearn.pipeline import Pipeline
+from sklearn.metrics import classification_report
 
 
 def get_window(camps, campaign_dates):
@@ -123,6 +124,10 @@ def build_pipeline():
     ])
     return pipe
 
+def eval(y_test,x_test,estimator):
+    y_true = y_test
+    y_pred = estimator.predict(x_test)
+    return classification_report(y_true,y_pred)
 
 def main():
     X, y, column_name = load_and_prepare_data()
@@ -141,6 +146,9 @@ def main():
     print("Model trained successfully")
     minutes, seconds = np.divmod(t2 - t1, 60)
     print(f"Time Elapsed: {minutes:.0f} M {seconds:.2f} S")
+
+
+    print(eval(y_test,x_test,pipe_mv))
 
     joblib.dump(pipe_mv, "models/pipe.pkl")
     joblib.dump(column_name, "models/column_names.pkl")
