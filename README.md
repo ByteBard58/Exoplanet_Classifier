@@ -28,6 +28,7 @@ This version blends the strengths of **ensemble learning** with extensive prepro
     - [Data Sources](#data-sources)
     - [Training Workflow](#training-workflow)
     - [Evaluation](#evaluation)
+    - [Note](#note)
   - [Acknowledgements](#acknowledgements)
   - [Appreciation](#appreciation)
 
@@ -169,7 +170,7 @@ EXOPLANET_CLASSIFIER/
 ├── app.py
 ├── fit.py
 ├── LICENSE
-├── README.md
+├── README.md          # You're reading it now
 ├── requirements.txt
 └── research.ipynb
 ```
@@ -248,7 +249,6 @@ Targets are mapped as follows:
 
 ### Evaluation
 
-The model was evaluated on a held-out test set (1/3 of the data, stratified by class).  
 Here is the classification report:
 
 | Class | Precision | Recall | F1-score | Support |
@@ -265,6 +265,18 @@ Here is the classification report:
 
 This demonstrates that the upgraded stacking classifier maintains strong performance on confirmed and false positive classes, with room for improvement on candidate predictions.  
 The model balances **accuracy, generalization, and class fairness**, making it reliable for preliminary exoplanet classification tasks.
+
+---
+
+### Note 
+Despite extensive experimentation, this represents the current performance ceiling achievable with the available data.  
+Numerous optimizations were explored — including hyperparameter tuning, feature scaling, class rebalancing, and ensemble variations — yet further improvements beyond ~0.75 accuracy were not observed.  
+This indicates a **data limitation rather than a model limitation**, as the features may not carry additional separable information for higher classification accuracy.  
+
+The research process behind this version involved significant model testing and fine-tuning efforts (see `research.ipynb`).  
+ 
+**Suggestions and improvements are highly welcome** — contributions or insights from the community could help push the model beyond its present boundary.
+
 
 ---
   
