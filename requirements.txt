@@ -6,3 +6,4 @@ joblib
 gunicorn
 xgboost
 imbalanced-learn
+matplotlib
