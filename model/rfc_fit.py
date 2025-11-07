@@ -1,8 +1,17 @@
-from sklearn.ensemble import RandomForestClassifier
-from sklearn.model_selection import train_test_split
+from sklearn.model_selection import train_test_split, RandomizedSearchCV
 from sklearn.preprocessing import StandardScaler
-from sklearn.metrics import classification_report, confusion_matrix
 from sklearn.impute import SimpleImputer
+from sklearn.metrics import classification_report
+
+from sklearn.ensemble import RandomForestClassifier,VotingClassifier
+from sklearn.linear_model import LogisticRegression
+from sklearn.svm import SVC
+from xgboost import XGBClassifier
+
+from imblearn.over_sampling import SMOTE
+from imblearn.pipeline import Pipeline
+
+import time
 import pandas as pd
 import numpy as np
 import joblib
@@ -105,6 +114,9 @@ X_train, X_test, y_train, y_test = train_test_split(
     X_scaled, y, test_size=1/3, shuffle=True, random_state=91, stratify=y
 )
 
+##### STAR CHANGING FROM HERE !!
+
+
 # Model Development
 model = RandomForestClassifier(n_estimators=1000,max_depth=None,random_state=91,class_weight="balanced")
 model.fit(X_train, y_train)
@@ -112,7 +124,6 @@ model.fit(X_train, y_train)
 # Model Performence Evaluation
 y_pred = model.predict(X_test)
 print("Confusion Matrix:")
-print(confusion_matrix(y_test, y_pred))
 print("\nClassification Report:")
 print(classification_report(y_test, y_pred, target_names=["FALSE POSITIVE","CANDIDATE","CONFIRMED"]))
 
