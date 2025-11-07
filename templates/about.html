@@ -1,177 +1,3 @@
-<!-- <!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <title>About - Exoplanet Classifier™</title>
-
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 20px;
-            line-height: 1.6;
-            background-color: #141414;
-            color: white;
-            padding: 20px 30px;
-        }
-
-        h1,
-        h2,
-        h3 {
-            color: #00BCFF;
-        }
-
-        a {
-            color: white;
-        }
-
-        table {
-            border-collapse: collapse;
-            width: 100%;
-            margin-top: 15px;
-        }
-
-        table,
-        th,
-        td {
-            border: 1px solid #00BCFF;
-            padding: 8px;
-            text-align: left;
-        }
-
-        th {
-            color: #141414;
-            background-color: #00BCFF;
-        }
-    </style>
-</head>
-
-<body>
-    <h1>Welcome!</h1>
-
-    <p>
-        The <b>Exoplanet Classifier™</b> is a project developed by <b>Team Ontohin 4b</b>
-        for the NASA Space Apps Challenge 2025.
-    </p>
-
-    <h2>Objective</h2>
-    <p>
-        The objective of this web app is to predict new exoplanet’s status (<b>CONFIRMED</b>, <b>CANDIDATE</b>, <b>FALSE
-            POSITIVE</b>) by evaluating user-given inputs.
-    </p>
-
-    <h2>How does it work?</h2>
-    <p>
-        User inputs are sent to our model through a Flask API endpoint.
-        The model then predicts the class and returns a probability for each category.
-        We built this using <b>scikit-learn’s LogisticRegression</b> with Softmax regression,
-        which allows classification into more than two classes.
-    </p>
-
-    <h3>Possible Outputs:</h3>
-    <ul>
-        <li><b>CONFIRMED (2)</b> → Represents a confirmed exoplanet.</li>
-        <li><b>CANDIDATE (1)</b> → Not confirmed or false positive; requires further analysis.</li>
-        <li><b>FALSE POSITIVE (0)</b> → Does not represent an exoplanet.</li>
-    </ul>
-
-    <h2>User Inputs</h2>
-    <p>
-        The model is trained on 14 features from NASA’s KOI dataset.
-        To run predictions, the user must provide 13 numeric inputs.
-    </p>
-
-    <table>
-        <tr>
-            <th>Input Feature</th>
-            <th>Unit</th>
-            <th>Description</th>
-        </tr>
-        <tr>
-            <td>Orbital Period</td>
-            <td>Days</td>
-            <td>Time to complete one orbit</td>
-        </tr>
-        <tr>
-            <td>Transit Epoch</td>
-            <td>BJD - 2,454,833.0</td>
-            <td>Reference time of transit</td>
-        </tr>
-        <tr>
-            <td>Transit Depth</td>
-            <td>ppm</td>
-            <td>Brightness dip during transit</td>
-        </tr>
-        <tr>
-            <td>Planet Radius</td>
-            <td>Earth radii</td>
-            <td>Size compared to Earth</td>
-        </tr>
-        <tr>
-            <td>Semi-Major Axis</td>
-            <td>AU</td>
-            <td>Average planet-star distance</td>
-        </tr>
-        <tr>
-            <td>Inclination</td>
-            <td>Degrees</td>
-            <td>Orbit tilt relative to Earth</td>
-        </tr>
-        <tr>
-            <td>Equilibrium Temperature</td>
-            <td>K</td>
-            <td>Estimated surface temperature</td>
-        </tr>
-        <tr>
-            <td>Insolation Flux</td>
-            <td>Earth flux</td>
-            <td>Starlight received vs. Earth</td>
-        </tr>
-        <tr>
-            <td>Impact Parameter</td>
-            <td>None (dimensionless)</td>
-            <td>Transit centrality (0=center, 1=edge)</td>
-        </tr>
-        <tr>
-            <td>Planet/Star Radius Ratio</td>
-            <td>None (dimensionless)</td>
-            <td>Planet size vs. star size</td>
-        </tr>
-        <tr>
-            <td>Stellar Density</td>
-            <td>g/cm³</td>
-            <td>Average density of star</td>
-        </tr>
-        <tr>
-            <td>Planet-Star Distance</td>
-            <td>R★ (stellar radii)</td>
-            <td>Distance in stellar radii</td>
-        </tr>
-        <tr>
-            <td>Number of Transits</td>
-            <td>None (count)</td>
-            <td>Observed transit count</td>
-        </tr>
-    </table>
-
-    <h2>Things to Keep in Mind</h2>
-    <ul>
-        <li>No ML model is 100% accurate — same here.</li>
-        <li>We tested with multiple NASA datasets, but extra data added noise and overfitting.</li>
-        <li>Final model uses only the KOI dataset for best balance.</li>
-    </ul>
-
-    <p>
-        Thank you for trying out our work!
-        We hope you enjoyed exploring this concept and our attempt to solve
-        an astronomical challenge with machine learning. 🌌
-    </p>
-
-    <a class="text-white" href="/">← Back to Prediction Page</a>
-</body>
-
-</html> -->
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -251,14 +77,8 @@
     </p>
 
     <p>
-        We have used the widely known <b>Scikit-learn</b> library and its
-        <b>RandomForestClassifier</b> to build it from the ground up.
-        It is an ensemble model which works by creating a bunch of decision trees
-        and training them with slightly different features.
-        If you want to learn more about it, click
-        <a href="https://scikit-learn.org/stable/modules/generated/sklearn.ensemble.RandomForestClassifier.html"
-            target="_blank">here</a>
-        to see the official docs.
+        We have used the widely known <b>Scikit-learn</b> library to build it from the ground up.
+        More info about the ML part can be found at the <a href="https://github.com/ByteBard58/Exoplanet_Classifier/blob/main/README.md",target="_blank">README file</a> of the repository.
     </p>
 
     <p>
@@ -378,7 +198,7 @@
     <p><b>Have a great day!</b></p>
 
     <p>
-        <a href="https://github.com/ByteBard58/Exoplanet-Classifier" target="_blank">
+        <a href="https://github.com/ByteBard58/Exoplanet_Classifier" target="_blank">
             Click here to visit the GitHub repository.
         </a>
     </p>
