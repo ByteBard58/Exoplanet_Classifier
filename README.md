@@ -1,6 +1,8 @@
   
 # The Exoplanet Classifier 🪐
   
+> Welcome to my forked version of The Exoplanet Classifier. This project was developed with my teammates from **Ontohin 4b** for the **NASA Space Apps Challenge 2025**. I have forked it under my own GitHub profile to enhance its robustness and overall quality, which we were unable to achieve within the short 48-hour timeline of the hackathon. The project remains licensed under Ontohin 4b and is available for further development and collaboration.
+
 A simple yet effective web-based Machine Learning tool that predicts whether a given set of transit data corresponds to a genuine exoplanet, a false positive, or an unclassified candidate. We combined sheer ML performance with a clean and gorgeous frontend UI that lets users explore exoplanets without any technical expertise.
 
 ---
@@ -70,99 +72,34 @@ The ML model serves as a website which is developed with proper frontend, backen
 
 ## Getting Started
 
-  
-
-  
 
 1.  **Clone the repository**
 
-  
 
 ```bash
-
-  
-
-git  clone  https://github.com/Ontohin-4b/The_Exoplanet_Classifier/
-
-  
-
-cd  "The_Exoplanet_Classifier"
-
-  
-
+git  clone  https://github.com/ByteBard58/Exoplanet_Classifier
+cd  "Exoplanet_Classifier"
 ```
-
   
-
-  
-
 2.  **Install dependencies**
 
-  
-
 ```bash
-
-  
-
 pip  install  -r  requirements.txt
-
-  
-
 ```
-
-  
-
-  
 
 3.  **Train the model (only once)**
 
-  
-
 ```bash
-
-  
-
 python  model/rfc_fit.py
-
-  
-
 ```
-
-  
-
-  
-
-1.  **Run the Flask framework**
-
-  
-
-  
+4.  **Run the Flask framework**
 
 ```bash
-
-  
-
 python  app.py
-
-  
-
 ```
-
-  
-
-  
-
 5. Open your browser and go to `http://127.0.0.1:5000` to access the web interface.
 
-  
-
-  
-
-6. If you want to close the server, press `Ctrl + C` in the terminal where you have run `app.py` from.
-
-  
-
-  
+6. If you want to close the server, press `Ctrl + C` in the terminal where you have run `app.py` from.  
 
 ---
 
