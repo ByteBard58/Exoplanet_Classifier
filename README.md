@@ -1,8 +1,8 @@
 # The Exoplanet Classifier 🪐
 
-> Welcome to my enhanced fork of **The Exoplanet Classifier**. Originally developed with my teammates from **Ontohin 4b** for the **NASA Space Apps Challenge 2025**, this project now represents the upgraded and research-extended version of that submission.  
+> Welcome to my enhanced fork of **The Exoplanet Classifier**. Originally developed with my teammates from **Ontohin 4b** for the **NASA Space Apps Challenge 2025**, this project now represents the upgraded and research-extended version of that submission. To check out the original repository, click [**here**](https://github.com/Ontohin-4b/The_Exoplanet_Classifier).   
 > 
-> The original repository remains archived under Ontohin 4b and licensed as such. This fork exists purely for further research, experimentation, and personal development to make the classifier far more powerful and accurate than the hackathon version.
+> The original repository remains archived under [**Ontohin 4b**](https://github.com/Ontohin-4b) and licensed as such. This fork exists purely for further research, experimentation, and personal development to make the classifier far more powerful and accurate than the hackathon version.
 
 A robust, data-driven Machine Learning tool that classifies whether a given set of transit data corresponds to a **confirmed exoplanet**, **false positive**, or **candidate**.  
 This version blends the strengths of **ensemble learning** with extensive preprocessing, imputation, and class balancing, resulting in a more stable and generalizable model.
