@@ -1,464 +1,132 @@
-<!DOCTYPE html>
-<html lang="en">
+{% extends "base.html" %}
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Exoplanet Classifier™</title>
+{% block title %}Home - Exoplanet Classifier{% endblock %}
 
-    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
-
-    <link rel="stylesheet"
-        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css"
-        integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw=="
-        crossorigin="anonymous" referrerpolicy="no-referrer" />
-
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link
-        href="https://fonts.googleapis.com/css2?family=Lexend+Deca:wght@100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
-        rel="stylesheet">
-</head>
-
-<body id="main">
-    <header class="w-full h-[150px] bg-[#141414] flex items-center justify-around">
-        <div class="flex items-center justify-center ">
-            <img id="nasa-logo" class="w-[140px] h-[50px]"
-                src="{{ url_for('static', filename='materials/32247a32f95f2504404c78a8df9ed849.png') }}"
-                alt="error loading image">
-            <div class="relative min-w-[100px] flex items-center justify-center ">
-                <h1 id="nav-text" class="site-title relative text-4xl font-bold text-sky-400">
-                    Int. Space Apps Challenge
-                    <span id="hanger" class="absolute top-10 right-0 text-sm text-white">
-                        Presented by Ontohin 4b
-                    </span>
-                </h1>
-            </div>
+{% block content %}
+<!-- Hero Section -->
+<section class="hero-section">
+    <div class="hero-content">
+        <h3 class="hero-subtitle">Welcome to the Future</h3>
+        <h1 class="hero-title">
+            Discover New <br>
+            <span class="text-gradient">Worlds</span>
+        </h1>
+        <p class="hero-description">
+            Harness the power of Machine Learning to classify exoplanets. 
+            Input transit data and let our advanced ensemble model determine if it's a 
+            Confirmed Planet, Candidate, or False Positive.
+        </p>
+        <button id="scroll-to-form" class="btn btn-primary">
+            Start Analysis <i class="fa-solid fa-arrow-right"></i>
+        </button>
+    </div>
+    
+    <div class="hero-image">
+        <div class="hero-img-wrapper">
+            <img src="{{ url_for('static', filename='materials/d821657540b6765c2d915b547bfce9c5 (1).jpg') }}" alt="Exoplanet Art" class="hero-img">
         </div>
-        <a href="{{ url_for('about') }}" class="text-2xl font-bold text-sky-400">Learn more</a>
-    </header>
+    </div>
+</section>
 
-    <main class="bg-[#141414] w-full h-[200vw - 150px]">
-        <!-- HERO SECTION -->
-        <div id="hero-div" class="w-full h-[700px] flex items-center justify-center bg-[#141414]">
-            <div id="image-container" class="w-[800px] h-[700px] flex items-center justify-center">
-                <img class="mask-r-from-80% mask-t-from-80% mask-b-from-80% mask-l-from-80% w-[100%]"
-                    src="{{ url_for('static', filename='materials/d821657540b6765c2d915b547bfce9c5 (1).jpg') }}"
-                    alt="">
+<!-- Form Section -->
+<section id="form-section" class="form-section">
+    <div class="glass-card">
+        <div class="form-header">
+            <h2 class="form-title">Input <span class="text-gradient">Parameters</span></h2>
+            <p style="color: var(--text-muted);">Enter the transit details below to generate a prediction.</p>
+        </div>
+
+        <form id="predictForm" class="form-grid">
+            <!-- Inputs -->
+            <div class="input-group">
+                <input type="number" step="any" id="orbital-period" class="input-field" placeholder=" " required>
+                <label for="orbital-period" class="input-label">Orbital Period (days)</label>
             </div>
-            <div id="text-container" class="w-[50%]">
-                <h3 id="welcome-text" class="text-xl text-white ">Welcome, To The</h3>
-                <h1 id="hero" class="text-5xl font-bold text-white ">Exoplanet-Classifier</h1>
-                <p id="hero-text" class="text text-white w-[80%] py-5">
-                    Developed by team Ontohin 4b. Here, you will need to provide
-                    some numerical data (such as orbital period, transit depth etc.) and a specially trained ML model
-                    will classify it under 3 classes:
-                    Confirmed planet, Planetary Candidate or False Positive.
-                </p>
-                <button id="animated-btn"
-                    class="px-12 rounded-md relative font-semibold hover:text-white">
-                    Get Started <i class="fa-regular fa-circle-right"></i>
+
+            <div class="input-group">
+                <input type="number" step="any" id="transit-epoch" class="input-field" placeholder=" " required>
+                <label for="transit-epoch" class="input-label">Transit Epoch (BJD)</label>
+            </div>
+
+            <div class="input-group">
+                <input type="number" step="any" id="transit-depth" class="input-field" placeholder=" " required>
+                <label for="transit-depth" class="input-label">Transit Depth (ppm)</label>
+            </div>
+
+            <div class="input-group">
+                <input type="number" step="any" id="planet-radius" class="input-field" placeholder=" " required>
+                <label for="planet-radius" class="input-label">Planet Radius (Earth radii)</label>
+            </div>
+
+            <div class="input-group">
+                <input type="number" step="any" id="semi-major-axis" class="input-field" placeholder=" " required>
+                <label for="semi-major-axis" class="input-label">Semi-Major Axis (AU)</label>
+            </div>
+
+            <div class="input-group">
+                <input type="number" step="any" id="inclination" class="input-field" placeholder=" " required>
+                <label for="inclination" class="input-label">Inclination (deg)</label>
+            </div>
+
+            <div class="input-group">
+                <input type="number" step="any" id="equilibrium-temp" class="input-field" placeholder=" " required>
+                <label for="equilibrium-temp" class="input-label">Equilibrium Temp (K)</label>
+            </div>
+
+            <div class="input-group">
+                <input type="number" step="any" id="insolation-flux" class="input-field" placeholder=" " required>
+                <label for="insolation-flux" class="input-label">Insolation Flux (Earth flux)</label>
+            </div>
+
+            <div class="input-group">
+                <input type="number" step="any" id="impact-parameter" class="input-field" placeholder=" " required>
+                <label for="impact-parameter" class="input-label">Impact Parameter</label>
+            </div>
+
+            <div class="input-group">
+                <input type="number" step="any" id="radius-ratio" class="input-field" placeholder=" " required>
+                <label for="radius-ratio" class="input-label">Planet/Star Radius Ratio</label>
+            </div>
+
+            <div class="input-group">
+                <input type="number" step="any" id="stellar-density" class="input-field" placeholder=" " required>
+                <label for="stellar-density" class="input-label">Stellar Density (g/cm³)</label>
+            </div>
+
+            <div class="input-group">
+                <input type="number" step="any" id="star-distance" class="input-field" placeholder=" " required>
+                <label for="star-distance" class="input-label">Planet-Star Distance (R★)</label>
+            </div>
+
+            <div class="input-group" style="grid-column: 1 / -1;">
+                <input type="number" step="any" id="num-transits" class="input-field" placeholder=" " required>
+                <label for="num-transits" class="input-label">Number of Transits</label>
+            </div>
+
+            <div class="form-actions">
+                <button type="submit" class="btn btn-primary">
+                    Run Prediction <i class="fa-solid fa-rocket"></i>
                 </button>
             </div>
-        </div>
+        </form>
+    </div>
+</section>
 
-        <!-- FORM SECTION -->
-        <div id="form-section"
-            class="w-full min-h-screen border-t flex items-center justify-center border-white rounded-[100px]">
-            <div id="wrapper"
-                class="w-[50%] rounded-[50px] h-[70%] bg-[#141414] flex flex-col">
-                <div id="container-head" class="px-12 pt-12 flex justify-between">
-                    <h1 id="card-head" class="text-white font-bold text-3xl leading-[40px]">
-                        The <br><span id="exo" class="text-5xl">Exoplanet</span><br><span id="classifier"
-                            class="text-6xl text-sky-400">Classifier</span>
-                    </h1>
-                    <div id="circle" class="w-[50px] rounded-[99%] h-[50px] bg-[#00BCFF]"></div>
-                </div>
-
-                <div id="idk" class="relative flex-1 flex justify-center items-center px-7">
-                    <p class="form-label top-[-25px] right-16 absolute text-white text-md font-semibold">
-                        Enter the details</p>
-
-                    <form id="predictForm" class="form-grid w-[95%] pt-10 pb-10">
-                        <!-- ==== INPUTS (same IDs as before) ==== -->
-                        <div class="input-wrapper">
-                            <input type="number" step="any" placeholder=" " id="orbital-period" required>
-                            <label for="orbital-period">Orbital Period [in days]</label>
-                        </div>
-
-                        <div class="input-wrapper">
-                            <input type="number" step="any" placeholder=" " id="transit-epoch" required>
-                            <label for="transit-epoch">Transit Epoch [BJD - 2,454,833.0]</label>
-                        </div>
-
-                        <div class="input-wrapper">
-                            <input type="number" step="any" placeholder=" " id="transit-depth" required>
-                            <label for="transit-depth">Transit Depth ppm [parts per million]</label>
-                        </div>
-
-                        <div class="input-wrapper">
-                            <input type="number" step="any" placeholder=" " id="planet-radius" required>
-                            <label for="planet-radius">Planet Radius [Earth radius]</label>
-                        </div>
-
-                        <div class="input-wrapper">
-                            <input type="number" step="any" placeholder=" " id="semi-major-axis" required>
-                            <label for="semi-major-axis">Semi-Major Axis [AU approx]</label>
-                        </div>
-
-                        <div class="input-wrapper">
-                            <input type="number" step="any" placeholder=" " id="inclination" required>
-                            <label for="inclination">Inclination [Degrees]</label>
-                        </div>
-
-                        <div class="input-wrapper">
-                            <input type="number" step="any" placeholder=" " id="equilibrium-temp" required>
-                            <label for="equilibrium-temp">Equilibrium Temperature [Kelvin]</label>
-                        </div>
-
-                        <div class="input-wrapper">
-                            <input type="number" step="any" placeholder=" " id="insolation-flux" required>
-                            <label for="insolation-flux">Insolation Flux [Earth flux]</label>
-                        </div>
-
-                        <div class="input-wrapper">
-                            <input type="number" step="any" placeholder=" " id="impact-parameter" required>
-                            <label for="impact-parameter">Impact Parameter</label>
-                        </div>
-
-                        <div class="input-wrapper">
-                            <input type="number" step="any" placeholder=" " id="radius-ratio" required>
-                            <label for="radius-ratio">Planet/Star Radius Ratio</label>
-                        </div>
-
-                        <div class="input-wrapper">
-                            <input type="number" step="any" placeholder=" " id="stellar-density" required>
-                            <label for="stellar-density">Stellar Density [gm/cm^3]</label>
-                        </div>
-
-                        <div class="input-wrapper">
-                            <input type="number" step="any" placeholder=" " id="star-distance" required>
-                            <label for="star-distance">Planet-Star Distance [R★ stellar radii]</label>
-                        </div>
-
-                        <div class="input-wrapper wide">
-                            <input type="number" step="any" id="num-transits" placeholder=" " required>
-                            <label for="num-transits">Number of Transits</label>
-                        </div>
-
-                        <button id="animated-btn" type="submit" form="predictForm"
-                            class="px-8 z-30 py-4 outline-none border-none rounded-md relative hover:text-white font-semibold">
-                            Predict <i class="fa-regular fa-circle-right"></i>
-                        </button>
-                    </form>
-                </div>
-            </div>
-        </div>
-
-        <!-- RESULT MODAL -->
-        <div id="resultModal"
-            class="hidden fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
-            <div class="bg-white rounded-lg shadow-lg p-6 w-[420px] relative">
-                <button id="closeModal"
-                    class="absolute top-4 right-4 text-gray-500 hover:text-gray-800 text-xl font-bold">&times;</button>
-
-                <h2 class="text-xl font-semibold mb-4">Classification Results</h2>
-
-                <div id="resultsBox" class="space-y-4">
-                    <!-- Filled by JS -->
-                </div>
-            </div>
-        </div>
-    </main>
-
-    <!-- ====================== STYLES ====================== -->
-    <style>
-        /* ---- Global ---- */
-        html,
-        body { overflow-x: hidden; }
-        * { font-family: "Poppins", sans-serif; }
-
-        #wrapper { border: 1px solid white; }
-
-        a { position: relative; }
-        a::before {
-            content: "";
-            position: absolute;
-            bottom: -6px;
-            left: 0;
-            width: 0;
-            height: 3px;
-            background: white;
-            transition: width .5s ease;
-        }
-        a:hover::before { width: 100%; }
-
-        /* ---- Autofill fixes ---- */
-        input:-webkit-autofill,
-        input:-webkit-autofill:hover,
-        input:-webkit-autofill:focus,
-        input:-webkit-autofill:active {
-            -webkit-box-shadow: 0 0 0 30px transparent inset !important;
-            box-shadow: 0 0 0 30px transparent inset !important;
-            -webkit-text-fill-color: inherit !important;
-            background-color: transparent !important;
-            transition: background-color 9999s ease-in-out 0s;
-        }
-        input:-webkit-autofill {
-            -webkit-text-fill-color: white !important;
-            -webkit-box-shadow: 0 0 0 1000px #141414 inset !important;
-            box-shadow: 0 0 0 1000px #141414 inset !important;
-            caret-color: white !important;
-        }
-
-        input { color: white; background: transparent; }
-        input::placeholder { color: white; }
-
-        /* ---- Form grid ---- */
-        .form-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 25px;
-        }
-        .wide { grid-column: span 2; }
-
-        .input-wrapper { position: relative; }
-        .input-wrapper input {
-            width: 100%;
-            background: transparent;
-            border: none;
-            border-bottom: 2px solid #252525;
-            color: white;
-            font-size: 16px;
-            padding: 12px 12px 12px 0;
-        }
-        .input-wrapper label {
-            position: absolute;
-            left: 0;
-            top: 12px;
-            color: rgb(92,92,92);
-            font-size: 13px;
-            pointer-events: none;
-            transition: all .3s ease;
-        }
-        .input-wrapper input:focus + label,
-        .input-wrapper input:not(:placeholder-shown) + label {
-            top: -10px;
-            font-size: 12px;
-            color: #e2e2e2;
-        }
-        .input-wrapper input:focus { border-bottom-color: #4f5258; outline: none; }
-
-        /* ---- Animated button ---- */
-        #animated-btn {
-            background-color: white;
-            font-size: 20px;
-            font-weight: 600;
-            transition: all .7s ease;
-            overflow: hidden;
-            z-index: 0;
-        }
-        #animated-btn::after {
-            content: "";
-            position: absolute;
-            height: .55rem;
-            width: .25rem;
-            background-color: #00BCFF;
-            left: 1.25rem;
-            bottom: 0;
-            border-radius: .375rem;
-            transform: translateY(100%) scale(1);
-            transition: all 1s ease;
-            z-index: -1;
-        }
-        #animated-btn:hover::after { transform: translateY(0) scale(300); }
-
-        /* ---- Result animation ---- */
-        #resultsBox {
-            opacity: 0;
-            transform: translateY(20px);
-            transition: opacity 1s ease, transform 1s ease;
-        }
-        #resultsBox.show { opacity: 1; transform: translateY(0); }
-
-        /* ---- Progress bars (the part you missed) ---- */
-        .prob-bar {
-            height: 8px;
-            background: #e0e0e0;
-            border-radius: 4px;
-            overflow: hidden;
-            margin-top: 4px;
-        }
-        .prob-fill {
-            height: 100%;
-            background: #00BCFF;
-            width: 0%;
-            transition: width 1.2s ease;
-        }
-
-        /* ---- Responsiveness ---- */
-        @media (max-width: 768px) {
-            .form-grid { grid-template-columns: 1fr; }
-            .wide, .submit-btn { grid-column: span 1; }
-            #form-section { height: 150vh; }
-            #wrapper { height: 90%; }
-            #idk { padding: 0 45px; }
-        }
-        @media (max-width: 1340px) { #wrapper { width: 80%; } }
-        @media (max-width: 720px) { .form-label { font-size:15px; margin-top:40px; } }
-        @media (max-width: 666px) {
-            #exo {font-size:30px;}
-            #card-head {font-size:18px;}
-            #classifier {font-size:40px;}
-        }
-        @media (max-width: 1392px) { #image-container { width:650px; } }
-        @media (max-width: 1300px) {
-            #hero {font-size:35px;}
-            #hero-text {width:80%;font-size:15px;}
-            #welcome-text {margin-bottom:10px;font-size:14px;}
-            #text-container #animated-btn {font-size:16px;}
-        }
-        @media (max-width: 1080px) {
-            #image-container {width:450px;height:500px;}
-            #hero-div {justify-content:flex-start;}
-            #hanger {font-size:13px;}
-            #nav-text {margin-top:10px;font-size:30px;}
-        }
-        @media (max-width: 906px) {
-            #hero-div {height:900px;flex-direction:column;}
-            #text-container {width:90%;text-align:center;}
-            #image-container {width:650px;}
-            a {margin-top:10px;font-size:18px;}
-            #hero-text {width:100%;text-align:center;}
-        }
-        @media (max-width: 770px) {
-            #nav-text {margin-top:5px;letter-spacing:-1px;}
-            #hanger {letter-spacing:0;}
-            #nasa-logo {height:35px;width:100px;}
-        }
-        @media (max-width: 730px) { #text-container {width:70%;} }
-        @media (max-width: 655px) {
-            .site-title {font-size:22px;}
-            #circle {display:none;}
-            .site-title::before {content:"ISAC";visibility:visible;position:absolute;top:100px;}
-            .site-title span {display:none;}
-            .site-title {visibility:hidden;}
-            header {padding-left:30px;padding-right:30px;}
-            a {width:150px;margin-top:0;}
-        }
-        @media (max-width: 515px) {
-            a {width:200px;}
-            #nav-text::before {margin-top:97px;}
-        }
-        @media (max-width: 433px) {
-            header {flex-direction:column;padding-top:50px;}
-            .site-title::before {display:none;}
-            .site-title {visibility:visible;}
-            #nav-text {text-align:center;font-weight:400;}
-            #image-container {height:400px;padding-top:20px;}
-            #image-container img {width:500px;}
-            a {text-align:center;margin-top:10px;}
-        }
-        @media (max-width: 1115px) { .input-wrapper label {font-size:10px;} }
-        @media (max-width: 480px) {
-            #form-section {border:none;}
-            header {justify-content:center;padding-top:30px;}
-            #image-container {padding-top:0;}
-            #nav-text {font-size:20px;}
-            a {margin-top:6px;}
-        }
-        @media (max-width: 450px) {
-            #form-section {height:auto;padding:50px 0;align-items:flex-start;}
-            #wrapper {width:90%;min-height:auto;height:auto;padding:25px 20px;border-radius:30px;}
-            .form-grid {grid-template-columns:1fr;gap:18px;}
-            #idk {padding:10px 0;}
-            .input-wrapper input {font-size:14px;}
-            .input-wrapper label {font-size:12px;}
-        }
-    </style>
-
-    <!-- ====================== SCRIPTS ====================== -->
-    <script src="https://cdn.jsdelivr.net/npm/locomotive-scroll@3.5.4/dist/locomotive-scroll.js"></script>
-    <script src="{{ url_for('static', filename='script.js') }}"></script>
-
-    <script>
-        const form = document.getElementById('predictForm');
-        const modal = document.getElementById('resultModal');
-        const resultsBox = document.getElementById('resultsBox');
-        const closeBtn = document.getElementById('closeModal');
-
-        form.addEventListener('submit', async (e) => {
-            e.preventDefault();
-
-            const payload = {
-                "orbital-period":   parseFloat(document.getElementById('orbital-period').value),
-                "transit-epoch":    parseFloat(document.getElementById('transit-epoch').value),
-                "transit-depth":    parseFloat(document.getElementById('transit-depth').value),
-                "planet-radius":    parseFloat(document.getElementById('planet-radius').value),
-                "semi-major-axis":  parseFloat(document.getElementById('semi-major-axis').value),
-                "inclination":      parseFloat(document.getElementById('inclination').value),
-                "equilibrium-temp": parseFloat(document.getElementById('equilibrium-temp').value),
-                "insolation-flux":  parseFloat(document.getElementById('insolation-flux').value),
-                "impact-parameter": parseFloat(document.getElementById('impact-parameter').value),
-                "radius-ratio":     parseFloat(document.getElementById('radius-ratio').value),
-                "stellar-density":  parseFloat(document.getElementById('stellar-density').value),
-                "star-distance":    parseFloat(document.getElementById('star-distance').value),
-                "num-transits":     parseFloat(document.getElementById('num-transits').value),
-            };
-
-            try {
-                const resp = await fetch('/predict', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify(payload)
-                });
-
-                const data = await resp.json();
-                if (data.error) throw new Error(data.error);
-
-                const barsHTML = Object.entries(data.probabilities)
-                    .sort((a, b) => b[1] - a[1]) // highest first
-                    .map(([cls, prob]) => {
-                        const pct = (prob * 100).toFixed(1);
-                        return `
-                            <div class="mb-3">
-                                <div class="flex justify-between text-sm mb-1">
-                                    <span>${cls}</span>
-                                    <span>${pct}%</span>
-                                </div>
-                                <div class="prob-bar">
-                                    <div class="prob-fill" style="width:0%"></div>
-                                </div>
-                            </div>`;
-                    }).join('');
-
-                resultsBox.innerHTML = `
-                    <p class="text-lg font-medium mb-3">Prediction: <strong>${data.prediction}</strong></p>
-                    <div class="space-y-2">${barsHTML}</div>
-                `;
-
-            
-                modal.classList.remove('hidden');
-                setTimeout(() => {
-                    resultsBox.classList.add('show');
-                    document.querySelectorAll('.prob-fill').forEach(bar => {
-                        const pct = bar.parentElement.previousElementSibling.querySelector('span:last-child').textContent;
-                        bar.style.width = pct;
-                    });
-                }, 50);
-
-            } catch (err) {
-                resultsBox.innerHTML = `<p class="text-red-600">Error: ${err.message}</p>`;
-                modal.classList.remove('hidden');
-                resultsBox.classList.add('show');
-            }
-        });
+<!-- Result Modal -->
+<div id="resultModal" class="modal-overlay">
+    <div class="modal-content">
+        <button id="closeModal" class="close-modal">&times;</button>
         
-        closeBtn.addEventListener('click', () => {
-            modal.classList.add('hidden');
-            resultsBox.classList.remove('show');
-            resultsBox.innerHTML = '';
-        });
-        modal.addEventListener('click', e => { if (e.target === modal) closeBtn.click(); });
-    </script>
-</body
+        <div class="result-header">
+            <h3>Analysis Complete</h3>
+            <div id="predictionResult" class="prediction-result">CONFIRMED</div>
+        </div>
+
+        <div id="resultsContainer">
+            <div id="probabilityBars">
+                <!-- Bars injected by JS -->
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
