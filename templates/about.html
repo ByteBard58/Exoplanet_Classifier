@@ -1,217 +1,148 @@
-<!DOCTYPE html>
-<html lang="en">
+{% extends "base.html" %}
 
-<head>
-    <meta charset="UTF-8">
-    <title>About - Exoplanet Classifier</title>
+{% block title %}About - Exoplanet Classifier{% endblock %}
 
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 20px;
-            line-height: 1.6;
-            background-color: #141414;
-            color: white;
-            padding: 20px 30px;
-        }
+{% block content %}
+<div class="about-content">
+    <div class="about-section">
+        <h1 class="text-gradient" style="font-size: 2.5rem; margin-bottom: 1rem;">About the Project</h1>
+        <p>
+            The <strong>Exoplanet Classifier</strong> is an advanced machine learning tool developed by 
+            <strong>Team Ontohin 4b</strong> for the <strong>NASA Space Apps Challenge 2025</strong>.
+            It leverages state-of-the-art ensemble algorithms to assist astronomers in identifying potential exoplanets.
+        </p>
+    </div>
 
-        h1,
-        h2,
-        h3 {
-            color: #00BCFF;
-        }
+    <div class="about-section">
+        <h2>Objective</h2>
+        <p>
+            The primary goal is to automate the classification of transit signals. By analyzing light curves and orbital parameters, 
+            the model categorizes candidates into three distinct classes:
+        </p>
+        <ul style="margin-top: 1rem; padding-left: 1.5rem; list-style: disc; color: var(--text-muted);">
+            <li><strong style="color: var(--text-main);">CONFIRMED (2)</strong>: Verified exoplanets.</li>
+            <li><strong style="color: var(--text-main);">CANDIDATE (1)</strong>: Potential planets requiring further observation.</li>
+            <li><strong style="color: var(--text-main);">FALSE POSITIVE (0)</strong>: Signals caused by other astrophysical phenomena.</li>
+        </ul>
+    </div>
 
-        a {
-            color: #00BCFF;
-            text-decoration: none;
-        }
+    <div class="about-section">
+        <h2>Technical Architecture</h2>
+        <p>
+            Built on <strong>Scikit-learn</strong>, the system employs a Stacking Ensemble Classifier. 
+            This combines the strengths of <strong>Random Forest</strong> and <strong>XGBoost</strong>, 
+            orchestrated by a Logistic Regression meta-classifier.
+            <br><br>
+            The backend is powered by <strong>Flask</strong>, serving a robust API that processes user inputs 
+            and returns real-time predictions with probability confidence scores.
+        </p>
+    </div>
 
-        a:hover {
-            text-decoration: underline;
-        }
+    <div class="about-section">
+        <h2>Input Parameters</h2>
+        <p>The model requires 13 specific orbital and transit features derived from NASA's Kepler mission data:</p>
+        
+        <div style="overflow-x: auto;">
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>Feature</th>
+                        <th>Unit</th>
+                        <th>Description</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Orbital Period</td>
+                        <td>Days</td>
+                        <td>Time taken to complete one full orbit.</td>
+                    </tr>
+                    <tr>
+                        <td>Transit Epoch</td>
+                        <td>BJD</td>
+                        <td>Time of the center of the first transit.</td>
+                    </tr>
+                    <tr>
+                        <td>Transit Depth</td>
+                        <td>ppm</td>
+                        <td>Fraction of stellar flux lost during transit.</td>
+                    </tr>
+                    <tr>
+                        <td>Planet Radius</td>
+                        <td>Earth Radii</td>
+                        <td>Estimated radius of the planet.</td>
+                    </tr>
+                    <tr>
+                        <td>Semi-Major Axis</td>
+                        <td>AU</td>
+                        <td>Average distance from the host star.</td>
+                    </tr>
+                    <tr>
+                        <td>Inclination</td>
+                        <td>Degrees</td>
+                        <td>Angle of the orbital plane.</td>
+                    </tr>
+                    <tr>
+                        <td>Equilibrium Temp</td>
+                        <td>Kelvin</td>
+                        <td>Theoretical surface temperature.</td>
+                    </tr>
+                    <tr>
+                        <td>Insolation Flux</td>
+                        <td>Earth Flux</td>
+                        <td>Incident solar radiation.</td>
+                    </tr>
+                    <tr>
+                        <td>Impact Parameter</td>
+                        <td>-</td>
+                        <td>Sky-projected distance at conjunction.</td>
+                    </tr>
+                    <tr>
+                        <td>Radius Ratio</td>
+                        <td>-</td>
+                        <td>Ratio of planet radius to star radius.</td>
+                    </tr>
+                    <tr>
+                        <td>Stellar Density</td>
+                        <td>g/cm³</td>
+                        <td>Density of the host star.</td>
+                    </tr>
+                    <tr>
+                        <td>Planet-Star Dist</td>
+                        <td>Stellar Radii</td>
+                        <td>Distance scaled by star size.</td>
+                    </tr>
+                    <tr>
+                        <td>Num Transits</td>
+                        <td>Count</td>
+                        <td>Total number of transit events observed.</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
 
-        table {
-            border-collapse: collapse;
-            width: 100%;
-            margin-top: 15px;
-        }
+    <div class="about-section">
+        <h2>Disclaimer</h2>
+        <p style="color: var(--text-muted); font-style: italic;">
+            While this model achieves high accuracy on the validation set, no ML model is infallible. 
+            Predictions should be used as a preliminary screening tool rather than absolute confirmation.
+            The model is optimized for Kepler-like data distributions.
+        </p>
+    </div>
 
-        table,
-        th,
-        td {
-            border: 1px solid #00BCFF;
-            padding: 8px;
-            text-align: left;
-        }
-
-        th {
-            color: #141414;
-            background-color: #00BCFF;
-        }
-
-        ul {
-            margin-left: 20px;
-        }
-    </style>
-</head>
-
-<body>
-    <h1>Welcome!</h1>
-
-    <p>
-        The <b>Exoplanet Classifier </b> is a project developed by <b>Team Ontohin 4b</b> for the
-        <b>NASA Space Apps Challenge 2025</b>.
-    </p>
-
-    <h2>Objective</h2>
-    <p>
-        The objective of this web app is to predict new exoplanet’s status
-        (<b>CONFIRMED</b>, <b>CANDIDATE</b>, <b>FALSE POSITIVE</b>) by evaluating user-given inputs.
-    </p>
-
-    <h2>How does it work?</h2>
-    <p>
-        The user-given data is sent to the model via a Flask API endpoint.
-        Then, the model predicts the classes and also returns a probability for each class
-        (which you can see after hitting the “Predict” button).
-    </p>
-
-    <p>
-        We have used the widely known <b>Scikit-learn</b> library to build it from the ground up.
-        More info about the ML part can be found at the <a href="https://github.com/ByteBard58/Exoplanet_Classifier/blob/main/README.md",target="_blank">README file</a> of the repository.
-    </p>
-
-    <p>
-        This is one of the most widely used models provided by Scikit-learn and also very suitable for our objective.
-        It predicts the result in three different classes:
-    </p>
-
-    <ul>
-        <li><b>CONFIRMED (2)</b> → The disposition represents a confirmed exoplanet.</li>
-        <li><b>CANDIDATE (1)</b> → The disposition is neither a confirmed exoplanet nor a false positive. It requires
-            further calculation to determine its actual status.</li>
-        <li><b>FALSE POSITIVE (0)</b> → The disposition does not represent an exoplanet.</li>
-    </ul>
-
-    <p>
-        The model also returns a probability (up to 3 decimal digits) of its prediction for each of those 3 classes.
-    </p>
-
-    <h2>User Inputs</h2>
-    <p>
-        The model is trained on 14 different features (including the output column) sourced from
-        NASA’s Kepler Object of Interest dataset. To run the prediction, the user needs to provide
-        13 different values (all in real numbers) as input. Here is a list of them:
-    </p>
-
-    <table>
-        <tr>
-            <th>Input Feature</th>
-            <th>Unit</th>
-            <th>Description</th>
-        </tr>
-        <tr>
-            <td>Orbital Period</td>
-            <td>Days</td>
-            <td>Time the planet takes to complete one orbit around its star.</td>
-        </tr>
-        <tr>
-            <td>Transit Epoch</td>
-            <td>BJD - 2,454,833.0</td>
-            <td>Reference time when the planet crosses in front of its star.</td>
-        </tr>
-        <tr>
-            <td>Transit Depth</td>
-            <td>ppm (parts per million)</td>
-            <td>How much the star’s brightness dips during transit.</td>
-        </tr>
-        <tr>
-            <td>Planet Radius</td>
-            <td>Earth radius</td>
-            <td>Size of the planet compared to Earth.</td>
-        </tr>
-        <tr>
-            <td>Semi-Major Axis</td>
-            <td>AU (approx)</td>
-            <td>Average distance between the planet and its star.</td>
-        </tr>
-        <tr>
-            <td>Inclination</td>
-            <td>Degrees</td>
-            <td>Tilt of the planet’s orbit relative to our view.</td>
-        </tr>
-        <tr>
-            <td>Equilibrium Temperature</td>
-            <td>Kelvin</td>
-            <td>Estimated average surface temperature of the planet.</td>
-        </tr>
-        <tr>
-            <td>Insolation Flux</td>
-            <td>Earth flux</td>
-            <td>Amount of starlight the planet receives compared to Earth.</td>
-        </tr>
-        <tr>
-            <td>Impact Parameter</td>
-            <td>None</td>
-            <td>How centrally the planet crosses the star (0 = center, 1 = edge).</td>
-        </tr>
-        <tr>
-            <td>Planet/Star Radius Ratio</td>
-            <td>None</td>
-            <td>Ratio of planet’s size to its star’s size.</td>
-        </tr>
-        <tr>
-            <td>Stellar Density</td>
-            <td>gm/cm³</td>
-            <td>Average density of the host star.</td>
-        </tr>
-        <tr>
-            <td>Planet–Star Distance</td>
-            <td>R★ (stellar radii)</td>
-            <td>Distance from the planet to the star, in units of stellar radii.</td>
-        </tr>
-        <tr>
-            <td>Number of Transits</td>
-            <td>None</td>
-            <td>How many times the planet has been observed passing in front of its star.</td>
-        </tr>
-    </table>
-
-    <h2>Things to Keep in Mind</h2>
-    <ul>
-        <li>No ML model is perfectly accurate — the same goes for this one.</li>
-        <li>We tried to use more than just the KOI dataset. We tested with more data from other open-source datasets
-            provided by NASA and its partners. Unfortunately, those introduced more noise and caused overfitting.</li>
-        <li>Within the short time period, we could not come up with a better solution, so we continued with just one
-            dataset.</li>
-    </ul>
-
-    <p>
-        For more information about the entire project, check the <b>README</b> file of the project repository.
-    </p>
-
-    <p>
-        Thank you for trying out our work! We hope you enjoyed the concept and our idea to solve this astronomical
-        challenge with the power of machine learning.
-    </p>
-
-    <p><b>Have a great day!</b></p>
-
-    <p>
-        <a href="https://github.com/ByteBard58/Exoplanet_Classifier" target="_blank">
-            Click here to visit the GitHub repository.
+    <div style="margin-top: 4rem; text-align: center; border-top: 1px solid var(--border-color); padding-top: 2rem;">
+        <p>
+            <a href="https://github.com/ByteBard58/Exoplanet_Classifier" target="_blank" style="color: var(--accent-primary); font-weight: 600;">
+                <i class="fa-brands fa-github"></i> View Source on GitHub
+            </a>
+        </p>
+        <p style="margin-top: 1rem; color: var(--text-muted); font-size: 0.9rem;">
+            &copy; 2025 Ontohin 4b. Licensed under MIT.
+        </p>
+        <a href="{{ url_for('home') }}" class="btn btn-primary" style="margin-top: 2rem; display: inline-flex;">
+            <i class="fa-solid fa-arrow-left"></i> Back to Classifier
         </a>
-    </p>
-
-    <hr style="border-color: #00BCFF; margin: 30px 0;">
-
-    <p>
-        This project is developed by the members of <b>Ontohin 4b</b>.<br>
-        Check the <b>LICENSE</b> file of the repository for copyright
-        information.
-    </p>
-
-    <a href="/">← Back to Prediction Page</a>
-</body>
-
-</html>
+    </div>
+</div>
+{% endblock %}
